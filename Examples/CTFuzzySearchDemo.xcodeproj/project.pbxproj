@@ -1,0 +1,278 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E0208908153FFD8400781D56 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0208907153FFD8400781D56 /* UIKit.framework */; };
+		E020890A153FFD8400781D56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0208909153FFD8400781D56 /* Foundation.framework */; };
+		E020890C153FFD8400781D56 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E020890B153FFD8400781D56 /* CoreGraphics.framework */; };
+		E0208912153FFD8400781D56 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E0208910153FFD8400781D56 /* InfoPlist.strings */; };
+		E0208914153FFD8400781D56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E0208913153FFD8400781D56 /* main.m */; };
+		E0208918153FFD8400781D56 /* CTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E0208917153FFD8400781D56 /* CTAppDelegate.m */; };
+		E089C1BC15404E4E003C537F /* CTEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E089C1BB15404E4E003C537F /* CTEditViewController.m */; };
+		E0FD6CC6154189FF0098E383 /* sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = E0FD6CC5154189FF0098E383 /* sample.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E0208903153FFD8400781D56 /* CTFuzzySearchDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTFuzzySearchDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0208907153FFD8400781D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E0208909153FFD8400781D56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E020890B153FFD8400781D56 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E020890F153FFD8400781D56 /* CTFuzzySearchDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CTFuzzySearchDemo-Info.plist"; sourceTree = "<group>"; };
+		E0208911153FFD8400781D56 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E0208913153FFD8400781D56 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E0208915153FFD8400781D56 /* CTFuzzySearchDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CTFuzzySearchDemo-Prefix.pch"; sourceTree = "<group>"; };
+		E0208916153FFD8400781D56 /* CTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTAppDelegate.h; sourceTree = "<group>"; };
+		E0208917153FFD8400781D56 /* CTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTAppDelegate.m; sourceTree = "<group>"; };
+		E089C1BA15404E4E003C537F /* CTEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTEditViewController.h; sourceTree = "<group>"; };
+		E089C1BB15404E4E003C537F /* CTEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTEditViewController.m; sourceTree = "<group>"; };
+		E0FD6CC5154189FF0098E383 /* sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E0208900153FFD8400781D56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0208908153FFD8400781D56 /* UIKit.framework in Frameworks */,
+				E020890A153FFD8400781D56 /* Foundation.framework in Frameworks */,
+				E020890C153FFD8400781D56 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E02088F8153FFD8300781D56 = {
+			isa = PBXGroup;
+			children = (
+				E020890D153FFD8400781D56 /* CTFuzzySearchDemo */,
+				E0208906153FFD8400781D56 /* Frameworks */,
+				E0208904153FFD8400781D56 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E0208904153FFD8400781D56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E0208903153FFD8400781D56 /* CTFuzzySearchDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E0208906153FFD8400781D56 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E0208907153FFD8400781D56 /* UIKit.framework */,
+				E0208909153FFD8400781D56 /* Foundation.framework */,
+				E020890B153FFD8400781D56 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E020890D153FFD8400781D56 /* CTFuzzySearchDemo */ = {
+			isa = PBXGroup;
+			children = (
+				E0208916153FFD8400781D56 /* CTAppDelegate.h */,
+				E0208917153FFD8400781D56 /* CTAppDelegate.m */,
+				E089C1BA15404E4E003C537F /* CTEditViewController.h */,
+				E089C1BB15404E4E003C537F /* CTEditViewController.m */,
+				E020890E153FFD8400781D56 /* Supporting Files */,
+				E0FD6CC5154189FF0098E383 /* sample.txt */,
+			);
+			path = CTFuzzySearchDemo;
+			sourceTree = "<group>";
+		};
+		E020890E153FFD8400781D56 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E020890F153FFD8400781D56 /* CTFuzzySearchDemo-Info.plist */,
+				E0208910153FFD8400781D56 /* InfoPlist.strings */,
+				E0208913153FFD8400781D56 /* main.m */,
+				E0208915153FFD8400781D56 /* CTFuzzySearchDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E0208902153FFD8400781D56 /* CTFuzzySearchDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E020891B153FFD8400781D56 /* Build configuration list for PBXNativeTarget "CTFuzzySearchDemo" */;
+			buildPhases = (
+				E02088FF153FFD8400781D56 /* Sources */,
+				E0208900153FFD8400781D56 /* Frameworks */,
+				E0208901153FFD8400781D56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTFuzzySearchDemo;
+			productName = CTFuzzySearchDemo;
+			productReference = E0208903153FFD8400781D56 /* CTFuzzySearchDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E02088FA153FFD8300781D56 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CT;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = www.wimside.com;
+			};
+			buildConfigurationList = E02088FD153FFD8300781D56 /* Build configuration list for PBXProject "CTFuzzySearchDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E02088F8153FFD8300781D56;
+			productRefGroup = E0208904153FFD8400781D56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E0208902153FFD8400781D56 /* CTFuzzySearchDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E0208901153FFD8400781D56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0208912153FFD8400781D56 /* InfoPlist.strings in Resources */,
+				E0FD6CC6154189FF0098E383 /* sample.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E02088FF153FFD8400781D56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0208914153FFD8400781D56 /* main.m in Sources */,
+				E0208918153FFD8400781D56 /* CTAppDelegate.m in Sources */,
+				E089C1BC15404E4E003C537F /* CTEditViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E0208910153FFD8400781D56 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E0208911153FFD8400781D56 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E0208919153FFD8400781D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E020891A153FFD8400781D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E020891C153FFD8400781D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CTFuzzySearchDemo/CTFuzzySearchDemo-Prefix.pch";
+				INFOPLIST_FILE = "CTFuzzySearchDemo/CTFuzzySearchDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E020891D153FFD8400781D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CTFuzzySearchDemo/CTFuzzySearchDemo-Prefix.pch";
+				INFOPLIST_FILE = "CTFuzzySearchDemo/CTFuzzySearchDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E02088FD153FFD8300781D56 /* Build configuration list for PBXProject "CTFuzzySearchDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E0208919153FFD8400781D56 /* Debug */,
+				E020891A153FFD8400781D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E020891B153FFD8400781D56 /* Build configuration list for PBXNativeTarget "CTFuzzySearchDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E020891C153FFD8400781D56 /* Debug */,
+				E020891D153FFD8400781D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E02088FA153FFD8300781D56 /* Project object */;
+}
