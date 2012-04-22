@@ -12,15 +12,12 @@ This minimalistic code sample should get you started within a few minutes. For a
 CTFuzzyIndex *index = [CTFuzzyIndex new];
 
 // Add words to the index, these can be hundreds of thousands
-NSArray *words = [NSArray arrayWithObjects:@"fast", @"fuzzy", @"string", @"searching", nil];
-for(NSString *word in words) {
-    [index addStringValue:word];
-}
+[index addWordsFromString:@"fuzzy string searching using CTFuzzySearch" options:CTFuzzyIndexIncludeRanges];
     
 // Search the index for matches of word with 2 errors maximum
 NSArray *matches = [index search:@"zearchin" withMaxDistance:2];
 for(CTFuzzyMatch *match in matches) {
-    NSLog("Found matching word '%@' with %d errors.", match.value, match.distance);
+    NSLog("Found %d occurrences of matching word '%@'.", [match.data count], match.value);
 }
 ```
 
