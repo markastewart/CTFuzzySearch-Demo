@@ -1,17 +1,18 @@
 #import "CTEditViewController.h"
 
-#import "CTFuzzyIndex.h"
-#import "CTFuzzyMatch.h"
+#import <CTFuzzySearch/CTFuzzySearch.h>
 
 @interface CTEditViewController ()
 @property (strong, nonatomic) UISearchDisplayController *search;
 @property (strong, nonatomic) CTFuzzyIndex *index;
 @property (strong, nonatomic) NSArray *matches;
 @property (strong, nonatomic) UITextView *textView;
+@property (assign, nonatomic) dispatch_queue_t serialSearchQueue;
 - (void)startSearch;
 @end
 
 @implementation CTEditViewController
+@synthesize serialSearchQueue = serialSearchQueue_;
 @synthesize search = search_;
 @synthesize index = index_;
 @synthesize matches = matches_;
@@ -107,20 +108,34 @@
 
 - (void) searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
-    self.index = [CTFuzzyIndex new];
-    NSString *wordString = self.textView.text;
-    NSArray *words = [wordString componentsSeparatedByCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]];
+    NSString *placeholder = self.search.searchBar.placeholder;
+    self.search.searchBar.placeholder = @"Indexing...";
     
-    for(NSString *word in words) {
-        if([word length]>0) {
-            [self.index addStringValue:word];
+    self.serialSearchQueue = dispatch_queue_create("org.wimberger.FuzzySearchQueue", NULL);
+    NSString *wordString = self.textView.text;
+    dispatch_async(self.serialSearchQueue, ^{
+        NSArray *words = [wordString componentsSeparatedByCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]];
+        
+        CTFuzzyIndex *idx = [CTFuzzyIndex new];
+        for(NSString *word in words) {
+            if([word length]>0) {
+                [idx addStringValue:word];
+            }
         }
-    }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.search.searchBar.placeholder = placeholder;
+            self.index = idx;
+        });
+    });
 }
 
 - (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
 {
-    self.index = nil;
+    dispatch_async(self.serialSearchQueue, ^{
+        dispatch_release(self.serialSearchQueue);
+        self.index = nil;
+    });
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -161,7 +176,7 @@
     NSString *text = self.search.searchBar.text;
     NSInteger distance = self.search.searchBar.selectedScopeButtonIndex;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(self.serialSearchQueue, ^{
         NSArray *matches = [self.index search:text withMaxDistance:distance];
         
         dispatch_async(dispatch_get_main_queue(), ^{
