@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		834C564C1543ED02009E3507 /* CTFuzzySearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834C564B1543ED02009E3507 /* CTFuzzySearch.framework */; };
+		83DD0C9515444C4900793387 /* CTMatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DD0C9415444C4900793387 /* CTMatchViewController.m */; };
 		E0208908153FFD8400781D56 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0208907153FFD8400781D56 /* UIKit.framework */; };
 		E020890A153FFD8400781D56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0208909153FFD8400781D56 /* Foundation.framework */; };
 		E020890C153FFD8400781D56 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E020890B153FFD8400781D56 /* CoreGraphics.framework */; };
@@ -20,6 +21,8 @@
 
 /* Begin PBXFileReference section */
 		834C564B1543ED02009E3507 /* CTFuzzySearch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CTFuzzySearch.framework; path = ../CTFuzzySearch.framework; sourceTree = SOURCE_ROOT; };
+		83DD0C9315444C4900793387 /* CTMatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CTMatchViewController.h; sourceTree = "<group>"; };
+		83DD0C9415444C4900793387 /* CTMatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTMatchViewController.m; sourceTree = "<group>"; };
 		E0208903153FFD8400781D56 /* CTFuzzySearchDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTFuzzySearchDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0208907153FFD8400781D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E0208909153FFD8400781D56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -85,6 +88,8 @@
 				E0208917153FFD8400781D56 /* CTAppDelegate.m */,
 				E089C1BA15404E4E003C537F /* CTEditViewController.h */,
 				E089C1BB15404E4E003C537F /* CTEditViewController.m */,
+				83DD0C9315444C4900793387 /* CTMatchViewController.h */,
+				83DD0C9415444C4900793387 /* CTMatchViewController.m */,
 				E020890E153FFD8400781D56 /* Supporting Files */,
 				E0FD6CC5154189FF0098E383 /* sample.txt */,
 			);
@@ -169,6 +174,7 @@
 				E0208914153FFD8400781D56 /* main.m in Sources */,
 				E0208918153FFD8400781D56 /* CTAppDelegate.m in Sources */,
 				E089C1BC15404E4E003C537F /* CTEditViewController.m in Sources */,
+				83DD0C9515444C4900793387 /* CTMatchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

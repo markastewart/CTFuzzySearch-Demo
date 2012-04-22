@@ -1,6 +1,7 @@
 #import "CTEditViewController.h"
 
 #import <CTFuzzySearch/CTFuzzySearch.h>
+#import "CTMatchViewController.h"
 
 @interface CTEditViewController ()
 @property (strong, nonatomic) UISearchDisplayController *search;
@@ -9,6 +10,8 @@
 @property (strong, nonatomic) UITextView *textView;
 @property (assign, nonatomic) dispatch_queue_t serialSearchQueue;
 - (void)startSearch;
+- (void)keyboardDidShow:(NSNotification *)notification;
+- (void) keyboardWillHide:(NSNotification *)notification;
 @end
 
 @implementation CTEditViewController
@@ -30,6 +33,47 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)startSearch
+{
+    NSString *text = self.search.searchBar.text;
+    NSInteger distance = self.search.searchBar.selectedScopeButtonIndex;
+    
+    dispatch_async(self.serialSearchQueue, ^{
+        NSDate *searchingStart = [NSDate new];
+        NSArray *matches = [self.index search:text withMaxDistance:distance];
+        NSLog(@"Searching finished in %f secs.", -[searchingStart timeIntervalSinceNow]);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.matches = matches;
+            [self.search.searchResultsTableView reloadData];
+        });
+    });
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = self.textView.contentInset;
+    contentInsets.bottom = keyboardSize.height;
+    self.textView.contentInset = contentInsets;
+    self.textView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= keyboardSize.height;
+    if (!CGRectContainsPoint(aRect, self.textView.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, self.textView.frame.origin.y - (keyboardSize.height-15));
+        [self.textView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void) keyboardWillHide:(NSNotification *)notification {
+    UIEdgeInsets contentInsets = self.textView.contentInset;
+    contentInsets.bottom = 0.0;
+    self.textView.contentInset = contentInsets;
+    self.textView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void)loadView
@@ -62,6 +106,7 @@
     self.search = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
 	[self.search setDelegate:self];
 	[self.search setSearchResultsDataSource:self];
+    [self.search setSearchResultsDelegate:self];
 }
 
 - (void)viewDidLoad
@@ -82,28 +127,16 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)keyboardDidShow:(NSNotification *)notification
+#pragma mark - UISearchDisplayDelegate
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    UIEdgeInsets contentInsets = self.textView.contentInset;
-    contentInsets.bottom = keyboardSize.height;
-    self.textView.contentInset = contentInsets;
-    self.textView.scrollIndicatorInsets = contentInsets;
-    
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= keyboardSize.height;
-    if (!CGRectContainsPoint(aRect, self.textView.frame.origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, self.textView.frame.origin.y - (keyboardSize.height-15));
-        [self.textView setContentOffset:scrollPoint animated:YES];
-    }
+    return NO;
 }
 
-- (void) keyboardWillHide:(NSNotification *)notification {
-    UIEdgeInsets contentInsets = self.textView.contentInset;
-    contentInsets.bottom = 0.0;
-    self.textView.contentInset = contentInsets;
-    self.textView.scrollIndicatorInsets = contentInsets;
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    return NO;
 }
 
 - (void) searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
@@ -112,16 +145,13 @@
     self.search.searchBar.placeholder = @"Indexing...";
     
     self.serialSearchQueue = dispatch_queue_create("org.wimberger.FuzzySearchQueue", NULL);
-    NSString *wordString = self.textView.text;
+    NSString *text = self.textView.text;
     dispatch_async(self.serialSearchQueue, ^{
-        NSArray *words = [wordString componentsSeparatedByCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]];
-        
         CTFuzzyIndex *idx = [CTFuzzyIndex new];
-        for(NSString *word in words) {
-            if([word length]>0) {
-                [idx addStringValue:word withData:[NSNumber numberWithInt:1]];
-            }
-        }
+
+        NSDate *indexingStart = [NSDate new];
+        [idx addWordsFromString:text options:CTFuzzyIndexIncludeRanges];
+        NSLog(@"Indexing finished in %f secs.", -[indexingStart timeIntervalSinceNow]);
 
         dispatch_async(dispatch_get_main_queue(), ^{
             self.search.searchBar.placeholder = placeholder;
@@ -138,6 +168,8 @@
     });
 }
 
+#pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.matches count];
@@ -145,21 +177,36 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [UITableViewCell new];
+    static NSString *CellIdentifier = @"ResultCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell==nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
     CTFuzzyMatch *match = [self.matches objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ (%d matches)", match.value, [match.data count]];
+    
     return cell;
 }
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return NO;
+    CTFuzzyMatch *match = [self.matches objectAtIndex:indexPath.row];
+
+    if ([[match.data objectAtIndex:0] isKindOfClass:NSValue.class]) {
+        CTMatchViewController *mvc = [[CTMatchViewController alloc] initWithMatch:match andFullText:self.textView.text];
+        [self.navigationController pushViewController:mvc animated:YES];
+    } else {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Demo Version" message:@"This function is limited in the demo version. Please try another search result." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
+        [self.search.searchResultsTableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
-{
-    return NO;
-}
+#pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
@@ -169,21 +216,6 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     [self startSearch];
-}
-
-- (void)startSearch
-{
-    NSString *text = self.search.searchBar.text;
-    NSInteger distance = self.search.searchBar.selectedScopeButtonIndex;
-    
-    dispatch_async(self.serialSearchQueue, ^{
-        NSArray *matches = [self.index search:text withMaxDistance:distance];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.matches = matches;
-            [self.search.searchResultsTableView reloadData];
-        });
-    });
 }
 
 @end

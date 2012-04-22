@@ -1,7 +1,13 @@
 #import <Foundation/Foundation.h>
 
+enum {
+    CTFuzzyIndexIncludeRanges = 1
+};
+typedef NSUInteger CTFuzzyIndexOptions;
+
 @interface CTFuzzyIndex : NSObject
-- (void)addStringValue:(NSString*)value;
-- (void)addStringValue:(NSString*)value withData:(id)data;
-- (NSArray*)search:(NSString*)word withMaxDistance:(NSInteger)distance;
+- (void)addString:(NSString*)string;
+- (void)addString:(NSString*)string withData:(id)data;
+- (void)addWordsFromString:(NSString *)string options:(CTFuzzyIndexOptions)opts;
+- (NSArray*)search:(NSString*)string withMaxDistance:(NSInteger)distance;
 @end
