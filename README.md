@@ -16,7 +16,7 @@ This minimalistic code sample should get you started within a few minutes:
 ```Objective-C
 CTFuzzyIndex *index = [CTFuzzyIndex new];
 
-// Add words to the index, this can be hundreds of thousands
+// Add words to the index, these can be hundreds of thousands
 NSArray *words = [NSArray arrayWithObjects:@"fast", @"fuzzy", @"string", @"searching", nil];
 for(NSString *word in words) {
     [index addStringValue:word];
