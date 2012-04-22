@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		834C564C1543ED02009E3507 /* CTFuzzySearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834C564B1543ED02009E3507 /* CTFuzzySearch.framework */; };
 		E0208908153FFD8400781D56 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0208907153FFD8400781D56 /* UIKit.framework */; };
 		E020890A153FFD8400781D56 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0208909153FFD8400781D56 /* Foundation.framework */; };
 		E020890C153FFD8400781D56 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E020890B153FFD8400781D56 /* CoreGraphics.framework */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		834C564B1543ED02009E3507 /* CTFuzzySearch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CTFuzzySearch.framework; path = ../CTFuzzySearch.framework; sourceTree = SOURCE_ROOT; };
 		E0208903153FFD8400781D56 /* CTFuzzySearchDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTFuzzySearchDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0208907153FFD8400781D56 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E0208909153FFD8400781D56 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -41,6 +43,7 @@
 				E0208908153FFD8400781D56 /* UIKit.framework in Frameworks */,
 				E020890A153FFD8400781D56 /* Foundation.framework in Frameworks */,
 				E020890C153FFD8400781D56 /* CoreGraphics.framework in Frameworks */,
+				834C564C1543ED02009E3507 /* CTFuzzySearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +70,7 @@
 		E0208906153FFD8400781D56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				834C564B1543ED02009E3507 /* CTFuzzySearch.framework */,
 				E0208907153FFD8400781D56 /* UIKit.framework */,
 				E0208909153FFD8400781D56 /* Foundation.framework */,
 				E020890B153FFD8400781D56 /* CoreGraphics.framework */,
@@ -232,6 +236,11 @@
 		E020891C153FFD8400781D56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../CTFuzzySearch.git\"",
+					"\"$(SRCROOT)/..\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CTFuzzySearchDemo/CTFuzzySearchDemo-Prefix.pch";
 				INFOPLIST_FILE = "CTFuzzySearchDemo/CTFuzzySearchDemo-Info.plist";
@@ -243,6 +252,11 @@
 		E020891D153FFD8400781D56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../CTFuzzySearch.git\"",
+					"\"$(SRCROOT)/..\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CTFuzzySearchDemo/CTFuzzySearchDemo-Prefix.pch";
 				INFOPLIST_FILE = "CTFuzzySearchDemo/CTFuzzySearchDemo-Info.plist";

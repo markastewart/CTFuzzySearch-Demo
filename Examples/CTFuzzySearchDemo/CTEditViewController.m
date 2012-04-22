@@ -119,7 +119,7 @@
         CTFuzzyIndex *idx = [CTFuzzyIndex new];
         for(NSString *word in words) {
             if([word length]>0) {
-                [idx addStringValue:word];
+                [idx addStringValue:word withData:[NSNumber numberWithInt:1]];
             }
         }
 
@@ -147,7 +147,7 @@
 {
     UITableViewCell *cell = [UITableViewCell new];
     CTFuzzyMatch *match = [self.matches objectAtIndex:indexPath.row];
-    cell.textLabel.text = match.value;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%d matches)", match.value, [match.data count]];
     return cell;
 }
 
