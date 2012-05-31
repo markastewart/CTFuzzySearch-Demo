@@ -33,8 +33,8 @@
 
 - (void)dealloc
 {
-  dispatch_release(self.serialSearchQueue);
-  self.serialSearchQueue = nil;
+    dispatch_release(self.serialSearchQueue);
+    self.serialSearchQueue = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -105,7 +105,6 @@
     [self.view addSubview:self.textView];
     [self.view addSubview:searchBar];
 
-    
     self.search = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
 	[self.search setDelegate:self];
 	[self.search setSearchResultsDataSource:self];
