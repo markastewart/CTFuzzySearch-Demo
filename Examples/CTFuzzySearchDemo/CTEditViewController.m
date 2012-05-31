@@ -8,7 +8,7 @@
 @property (strong, nonatomic) CTFuzzyIndex *index;
 @property (strong, nonatomic) NSArray *matches;
 @property (strong, nonatomic) UITextView *textView;
-@property (assign, nonatomic) dispatch_queue_t serialSearchQueue;
+@property (assign, atomic) dispatch_queue_t serialSearchQueue;
 - (void)startSearch;
 - (void)keyboardDidShow:(NSNotification *)notification;
 - (void) keyboardWillHide:(NSNotification *)notification;
@@ -26,12 +26,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.navigationItem.title = @"CTFuzzySearch Demo";
+        self.serialSearchQueue = dispatch_queue_create("org.wimberger.FuzzySearchQueue", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
 
 - (void)dealloc
 {
+  dispatch_release(self.serialSearchQueue);
+  self.serialSearchQueue = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -144,7 +147,6 @@
     NSString *placeholder = self.search.searchBar.placeholder;
     self.search.searchBar.placeholder = @"Indexing...";
     
-    self.serialSearchQueue = dispatch_queue_create("org.wimberger.FuzzySearchQueue", NULL);
     NSString *text = self.textView.text;
     dispatch_async(self.serialSearchQueue, ^{
         CTFuzzyIndex *idx = [CTFuzzyIndex new];
@@ -163,7 +165,6 @@
 - (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
 {
     dispatch_async(self.serialSearchQueue, ^{
-        dispatch_release(self.serialSearchQueue);
         self.index = nil;
     });
 }
